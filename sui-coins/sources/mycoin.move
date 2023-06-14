@@ -33,8 +33,8 @@ module examples::mycoin {
             /*witnes=*/witness, 
             /*decimals=*/6, 
             /*symbol=*/b"MYCOIN", 
-            /*name=*/b"", 
-            /*description=*/b"", 
+            /*name=*/b"Example coin", 
+            /*description=*/b"This is a coin that I created along my journey to learn Sui Move!", 
             /*icon_url=*/option::some<Url>(url::new_unsafe_from_bytes(b"https://d3hnfqimznafg0.cloudfront.net/image-handler/ts/20200218065624/ri/950/src/images/Article_Images/ImageForArticle_227_15820269818147731.png")), 
             /*ctx=*/ctx
         );
