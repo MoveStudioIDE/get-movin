@@ -22,14 +22,9 @@ module examples::mycoin {
     // coin::create_currency(): https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/coin.md#function-create_currency
     // transfer::public_freeze_object(): https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/transfer.md#function-public_freeze_object
     // transfer::public_transfer(): https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/transfer.md#function-public_transfer
-    fun init
-    (
-        witness: MYCOIN, 
-        ctx: &mut TxContext
-    ) 
-    {
+    fun init( witness: MYCOIN, ctx: &mut TxContext) {
         // Function interface: public fun create_currency<T: drop>(witness: T, decimals: u8, symbol: vector<u8>, name: vector<u8>, description: vector<u8>, icon_url: option::Option<url::Url>, ctx: &mut tx_context::TxContext): (coin::TreasuryCap<T>, coin::CoinMetadata<T>)
-        let (treasury, metadata) = coin::create_currency(
+        let (treasuryCap, metadata) = coin::create_currency(
             /*witnes=*/witness, 
             /*decimals=*/6, 
             /*symbol=*/b"MYCOIN", 
@@ -39,7 +34,7 @@ module examples::mycoin {
             /*ctx=*/ctx
         );
         
-        // Freezes the object. Freezing the object means that the object: 
+        // Freezes the object. Freezing the object means that the  object: 
         // - Is immutable
         // - Cannot be transferred
         //
@@ -50,7 +45,7 @@ module examples::mycoin {
         // Send the TreasuryCap object to the publisher of the module
         //
         // Note: transfer::transfer() cannot be used since TreasuryCap is defined in another module
-        transfer::public_transfer(treasury, tx_context::sender(ctx))
+        transfer::public_transfer(treasuryCap, tx_context::sender(ctx))
     }
 
     // This function is an example of how internal_mint_coin() can be used. 
@@ -72,7 +67,7 @@ module examples::mycoin {
         let new_coin = internal_mint_coin(cap, value, ctx);
 
         // transfer the new coin to the recipient
-        transfer::public_transfer(new_coin, recipient)
+        transfer::public_transfer(new_coin, recipient);
     }
 
     // This function is an example of how internal_burn_coin() can be used.

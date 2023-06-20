@@ -1,0 +1,3 @@
+# Description
+The Sui foundation provides their own coin module on the Sui network for anyone to use to implement their own coin. This package is an example of how to use the coin module to create your own coin, and provide functionality to mint and burn the coin. 
+
